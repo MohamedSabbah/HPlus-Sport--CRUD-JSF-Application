@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+	<f:metadata>
+	<f:event listener="#{login.grantPermission}" type="preRenderView"></f:event>
+	</f:metadata>
+
+<head>
+<meta charset="UTF-8" />
+<title>H+ Sport</title>
+<link rel="stylesheet" href="css/dashboard.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+	<header id="dashboard" class="header">
+		<nav class="nav" role="navigation">
+			<div class="container nav-elements">
+				<div class="branding">
+					<a href="#home"><img src="images/hpluslogo.svg"
+						alt="Logo - H Plus Sports" /></a>
+				</div>
+				<!-- branding -->
+				<ul class="navbar">
+					<li><a href="#home">home</a></li>
+					<li><a href="#history">history</a></li>
+					<li><a href="#products">products</a></li>
+					<li><a href="#guarantee">guarantee</a></li>
+					<li><a href="#people">people</a></li>
+					<h:panelGroup rendered="#{not empty admin}">
+					<li>
+					<h:form>
+					<h:commandLink id="logout" value="logout" action="#{login.logout}"/>
+					</h:form>
+					</li>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{empty admin}">
+					<li>
+					<a href="login.xhtml">Login</a>
+					</li>
+					</h:panelGroup>
+				</ul>
+				<!-- navbar -->
+			</div>
+			<!-- container nav-elements -->
+		</nav>
+	</header>
+	<section id="members" class="section">
+		<div class="container tagline">
+			<h1 class="headline">Dashboard</h1>
+			
+			<h:form>
+			<h:commandLink id="add" action="#{team.response}" style="float:right" actionListener="#{team.action}">Add a new employee
+			<f:attribute name="breadCrumb" value="add"/>
+			</h:commandLink>
+			</h:form>
+			
+		</div>
+		<!-- container tagline -->
+		<div class="container">
+			<h:dataTable var="employee" value="#{team.employeeList}"
+				varStatus="index">
+				<!-- Employee records -->
+				
+				<h:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{employee.ID}"/>
+				</h:column>
+				
+				<h:column>
+				<f:facet name="header">First</f:facet>
+				<h:outputText value="#{employee.firstName}"/>
+				</h:column>
+				
+				<h:column>
+				<f:facet name="header">Last</f:facet>
+				<h:outputText value="#{employee.lastName}"/>
+				</h:column>
+				
+				<h:column>
+				<f:facet name="header">Degree</f:facet>
+				<h:outputText value="#{employee.degree}"/>
+				</h:column>
+				
+				<h:column>
+				<f:facet name="header">Title</f:facet>
+				<h:outputText value="#{employee.title}"/>
+				</h:column>
+				
+				<h:column>
+				<f:facet name="header">Photo</f:facet>
+				<h:graphicImage value="images/employees/#{employee.photo}"/>
+				</h:column>
+				
+				<h:column>
+				<f:facet name="header">Description</f:facet>
+				<p class="description">
+				<h:outputText value="#{employee.description}"/>
+				</p>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Action</f:facet>
+					<h:form id="edit-delete" >
+					<h:commandButton id="edit" value="Edit"
+						action="#{team.edit(employee)}"  actionListener="#{team.action}">
+						<f:attribute name="breadCrumb" value="edit"/>
+						</h:commandButton>
+					<h:commandButton id="delete" value="Delete"
+						action="#{team.delete(employee)}" onclick="if(confirm('Are you sure?')==false)return false;" />
+						</h:form>
+				</h:column>
+			</h:dataTable>
+
+		</div>
+
+	</section>
+
+
+
+	<footer class="footer">
+		<header class="imageheader"></header>
+		<div class="container">
+			<nav class="nav" role="navigation">
+				<div class="container nav-elements">
+					<div class="branding">
+						<a href="#home"><img src="images/hpluslogo.svg"
+							alt="Logo - H Plus Sports" /></a>
+						<p class="address">
+							100 Main Street<br /> Seattle, WA 98144
+						</p>
+					</div>
+					<ul class="navbar">
+						<li><a href="#home">home</a></li>
+						<li><a href="#history">history</a></li>
+						<li><a href="#products">products</a></li>
+						<li><a href="#guarantee">guarantee</a></li>
+						<li><a href="#people">people</a></li>
+					</ul>
+				</div>
+			</nav>
+			<p class="legal">H+ Sport is a fictitious brand created by
+				lynda.com solely for the purpose of training. All products and
+				people associated with H+ Sport are also fictitious. Any resemblance
+				to real brands, products, or people is purely coincidental.
+				Information provided about the product is also fictitious and should
+				not be construed to be representative of actual products on the
+				market in a similar product category.</p>
+		</div>
+		<!-- container -->
+	</footer>
+	<!-- footer -->
+</body>
+</html>

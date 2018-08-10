@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<head>
+<meta charset="UTF-8" />
+<title>H+ Sport</title>
+<link rel="stylesheet" href="css/dashboard.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+	<header id="dashboard" class="header">
+		<nav class="nav" role="navigation">
+			<div class="container nav-elements">
+				<div class="branding">
+					<a href="#home"><img src="images/hpluslogo.svg"
+						alt="Logo - H Plus Sports" /></a>
+				</div>
+				<!-- branding -->
+				<ul class="navbar">
+					<li><a href="#home">home</a></li>
+					<li><a href="#history">history</a></li>
+					<li><a href="#products">products</a></li>
+					<li><a href="#guarantee">guarantee</a></li>
+					<li><a href="#people">people</a></li>
+					<h:panelGroup rendered="#{not empty admin}">
+					<li>
+					<h:form>
+					<h:commandLink id="logout" value="logout" action="#{login.logout}"/>
+					</h:form>
+					</li>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{empty admin}">
+					<li>
+					<a href="login.xhtml">Login</a>
+					</li>
+					</h:panelGroup>
+				</ul>
+				<!-- navbar -->
+			</div>
+			<!-- container nav-elements -->
+		</nav>
+	</header>
+	<section id="members" class="section">
+		<div class="container tagline">
+			<h1 class="headline">Login</h1>
+
+		</div>
+		<!-- container tagline -->
+
+		<div class="container">
+		<h:messages style="color:red"/>
+			<h:form id="form">
+				<h:outputText value="Username"/>
+				<h:inputText id="username" value="#{login.username}" required="true" requiredMessage="Username is required"/>
+				
+				<br/><br/>
+				<h:outputText value="Password"/>
+				<h:inputSecret id="password" value="#{login.password}" required="true" requiredMessage="Password is required"/>
+				
+				
+					<br/><br/>
+					<h:commandButton id="submit" value="Login" action="#{login.ValidateLogin}"/>
+					
+			</h:form>
+
+
+
+		</div>
+
+	</section>
+
+
+
+	<footer class="footer">
+		<header class="imageheader"></header>
+		<div class="container">
+			<nav class="nav" role="navigation">
+				<div class="container nav-elements">
+					<div class="branding">
+						<a href="#home"><img src="images/hpluslogo.svg"
+							alt="Logo - H Plus Sports" /></a>
+						<p class="address">
+							100 Main Street<br /> Seattle, WA 98144
+						</p>
+					</div>
+					<ul class="navbar">
+						<li><a href="#home">home</a></li>
+						<li><a href="#history">history</a></li>
+						<li><a href="#products">products</a></li>
+						<li><a href="#guarantee">guarantee</a></li>
+						<li><a href="#people">people</a></li>
+					</ul>
+				</div>
+			</nav>
+			<p class="legal">H+ Sport is a fictitious brand created by
+				lynda.com solely for the purpose of training. All products and
+				people associated with H+ Sport are also fictitious. Any resemblance
+				to real brands, products, or people is purely coincidental.
+				Information provided about the product is also fictitious and should
+				not be construed to be representative of actual products on the
+				market in a similar product category.</p>
+		</div>
+		<!-- container -->
+	</footer>
+	<!-- footer -->
+</body>
+</html>
